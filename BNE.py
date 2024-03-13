@@ -117,7 +117,6 @@ class Inverted(Straight):
         elif len(self) < len(other):
             self = self.equalize(len(other))
 
-        print(self, other)
         result, carry = addBinaries(self.binary_repr, other.binary_repr, True)
 
         sign, carry = addBinaries(self.sign, other.sign, True, outer_carry=carry)
@@ -134,8 +133,8 @@ class Inverted(Straight):
 
     def mult(self, n: int):
         if self.sign == '1':
-            return Inverted(self.sign, self.binary_repr.ljust(n, '1'))
-        return Inverted(self.sign, self.binary_repr.ljust(n, '0'))
+            return Inverted(self.sign, self.binary_repr.ljust(len(self) + n, '1'))
+        return Inverted(self.sign, self.binary_repr.ljust(len(self) + n, '0'))
 
     def toStraight(self):
         if self.sign == '1':
@@ -148,7 +147,7 @@ class Inverted(Straight):
 
 class Extended(Straight):
     def __neg__(self):
-        return Inverted(inverseBits(self.sign), addBinaries(inverseBits(self.binary_repr), '1'))
+        return Extended(inverseBits(self.sign), addBinaries(inverseBits(self.binary_repr), '1')[0])
 
     def __add__(self, other):
         if len(self) > len(other):
@@ -156,11 +155,13 @@ class Extended(Straight):
         elif len(self) < len(other):
             self = self.equalize(len(other))
 
-        print(self, other)
         result, carry = addBinaries(self.binary_repr, other.binary_repr, True)
 
         sign, carry = addBinaries(self.sign, other.sign, True, outer_carry=carry)
         return Extended(sign, result)
+
+    def __sub__(self, other):
+        return self + (-other)
 
     def toStraight(self):
         if self.sign == '1':
@@ -169,11 +170,11 @@ class Extended(Straight):
 
     def equalize(self, length: int):
         if self.sign == '1':
-            return Inverted(self.sign, self.binary_repr.rjust(length, '1'))
-        return Inverted(self.sign, self.binary_repr.rjust(length, '0'))
+            return Extended(self.sign, self.binary_repr.rjust(length, '1'))
+        return Extended(self.sign, self.binary_repr.rjust(length, '0'))
 
     def mult(self, n: int):
-        return Straight(self.sign, self.binary_repr.rjust(n, '0'))
+        return Extended(self.sign, self.binary_repr.ljust(len(self) + n, '0'))
 
     def suffix(self):
         return 'д'

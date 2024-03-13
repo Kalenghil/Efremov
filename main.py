@@ -1,14 +1,20 @@
 from BNE import *
 from StraightMult import *
+from FasterMethods import *
 from Output import underline, printStep
 if __name__ == "__main__":
     num1 = Straight('1', '1001')
     num2 = Straight('0', '1101')
-    print(int(num1), int(num2))
-
-    print(underline(num1 + num2))
 
     # firstMethod(num1, num2)
     # secondMethod(num1, num2)
     # thirdMethod(num1, num2)
-    fourthMethod(num1, num2)
+    # fourthMethod(num1, num2)
+
+    num1 = Straight('0', '101011')
+    num2 = Straight('0', '101101')
+    # num2 = intToExtended(-int(num1)).mult(4)
+    # num1 = Extended('0', '000000')
+    # print(num1, num2, num1 + num2)
+
+    PairMethod(num1, num2)
