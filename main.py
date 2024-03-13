@@ -9,4 +9,6 @@ if __name__ == "__main__":
     print(underline(num1 + num2))
 
     # firstMethod(num1, num2)
-    secondMethod(num1, num2)
+    # secondMethod(num1, num2)
+    # thirdMethod(num1, num2)
+    fourthMethod(num1, num2)
