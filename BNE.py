@@ -68,8 +68,6 @@ class Straight:
   def __init__(self, sign: str, binary_repr: str) -> None:
     self.binary_repr = binary_repr
     self.sign = sign
-    if self.valid() is False:
-      raise ValueError("invalid input data")
 
   def __neg__(self):
     sign = '1' if self.sign == '0' else '0'
