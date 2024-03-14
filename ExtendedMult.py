@@ -3,8 +3,12 @@ from Output import *
 
 
 def print_header(X: Straight, Y: Straight):
-    print(f'[X]_{X.suffix()} = {str(X)} = {int(X)}/{2 ** len(X)}')
-    print(f'[Y]_{X.suffix()} = {str(Y)} = {int(Y)}/{2 ** len(Y)}')
+    X_ext = intToExtended(int(X))
+    Y_ext = intToExtended(int(Y))
+    print(f'{f'[X]_{X.suffix()} = {str(X)} = {int(X)}/{2 ** len(X)}':>16} {f'[X]_{X_ext.suffix()} = {str(X_ext)} = {int(X)}/{2 ** len(X)}'}')
+    print(f'{f'[Y]_{Y.suffix()} = {str(Y)} = {int(Y)}/{2 ** len(Y)}':>16} {f'[Y]_{Y_ext.suffix()} = {str(Y_ext)} = {int(Y)}/{2 ** len(Y)}'}')
+    print(f'{f'-[X]_{X.suffix()} = {str(-X_ext)} = {int(-X_ext)}/{2 ** len(X)}':>16}')
+
 
     print(f'1. Вычисляем знак: Z_зн = X_зн ⊕ Y_зн = {X.sign} ⊕ {Y.sign} = {XOR(X.sign, Y.sign)}')
 
@@ -62,13 +66,13 @@ def secondMethod(X: Straight, Y: Straight):
         match curent_step:
             case '10':
                 S = S - X.mult(len(Y) - i)
-                printStep(' ', (-X).equalize(len(X) + i), f'-[X]_{X.suffix()}', is_result=True, is_plus=True)
+                printStep(' ', (-X).equalize(len(X) + i), f'-[X]_{X.suffix()} * 2^-{i}', is_result=True, is_plus=True)
 
             case '01':
                 S = S + X.mult(len(Y) - i).equalize(target_len)
-                printStep(' ', X.equalize(len(X) + i), f'[X]_{X.suffix()}', is_result=True, is_plus=True)
+                printStep(' ', X.equalize(len(X) + i), f'[X]_{X.suffix()} * 2^-{i}', is_result=True, is_plus=True)
             case _:
-                printStep(' ', X.equalize(len(X) + i), f'[X]_{X.suffix()}', is_result=True, is_plus=True, is_plus_crossed=True)
+                printStep(' ', X.equalize(len(X) + i), f'[X]_{X.suffix()} * 2^-{i}', is_result=True, is_plus=True, is_plus_crossed=True)
 
         printStep(' ', S, f'S_{i + 1}')
         print()
