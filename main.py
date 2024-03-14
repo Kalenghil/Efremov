@@ -27,13 +27,13 @@ if __name__ == "__main__":
     # thirdMethod(num1, num2)
     # fourthMethod(num1, num2)
 
-    num1 = Straight('0', '1111')
-    num2 = Straight('0', '1111')
+    num1 = Straight('0', '110011')
+    num2 = Straight('1', '011101')
     # num2 = intToExtended(-int(num1)).mult(4)
     # num1 = Extended('0', '000000')
     # print(num1, num2, num1 + num2)
 
-    FastMult.PairMethod(num1, num2)
+    ExtendedMult.secondMethod(num1, num2)
     sys.exit('0')
   while True:
     print_divider()
@@ -65,7 +65,7 @@ if __name__ == "__main__":
         print('Вы выбрали умноение в прямом коде')
         print('Выберете метод умножения: ')
         print("1 Первый способ")
-        print("2 Втрорй способ")
+        print("2 Второй способ")
         print("3 Третий способ")
         print("4 Четвёртый способ")
         method = input("Ваш выбор: ")
@@ -92,7 +92,7 @@ if __name__ == "__main__":
         method = input("Ваш выбор: ")
         match method:
           case '1':
-            FastMult.ButMethod(X, Y)
+            FastMult.ButMethodTest(X, Y)
           case '2':
             FastMult.PairMethod(X, Y)
           case _:
@@ -102,7 +102,7 @@ if __name__ == "__main__":
         print('Вы выбрали умножение в дополнительном коде')
         print('Выберете метод умножения: ')
         print("1 Первый способ")
-        print("2 Втрорй способ")
+        print("2 Второй способ")
         method = input("Ваш выбор: ")
         match method:
           case '1':
@@ -116,7 +116,7 @@ if __name__ == "__main__":
         print('Вы выбрали умножение в обратном коде')
         print('Выберете метод умножения: ')
         print("1 Первый способ")
-        print("2 Втрорй способ")
+        print("2 Второй способ")
         method = input("Ваш выбор: ")
         match method:
           case '1':
@@ -130,13 +130,19 @@ if __name__ == "__main__":
         print('Вы выбрали деление в прямом коде')
         print('Выберете метод деления: ')
         print("1 Первый способ")
-        print("2 Втрорй способ")
+        print("2 Второй способ")
         method = input("Ваш выбор: ")
+        steps = input(
+            "Введите количество знаков после запятой (по умалчанию 4): ")
+        if steps == '':
+          steps = 4
+        else:
+          steps = int(steps)
         match method:
           case '1':
-            Division.firstMethod(X, Y)
+            Division.firstMethod(X, Y, steps)
           case '2':
-            Division.secondMethod(X, Y)
+            Division.secondMethod(X, Y, steps)
           case _:
             print("Неверный выбор")
       case _:

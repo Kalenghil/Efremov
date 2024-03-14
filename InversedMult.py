@@ -92,28 +92,48 @@ def secondMethod(X: Straight, Y: Straight):
   Y = Y.equalize(len(Y))
   Y_nums = Y.binary_repr
   sign = XOR(X.sign, Y.sign)
+  if Y.sign == '1':
+    print(
+        f'Преобразуем разряды множителя [\u1EF8]_{Y.suffix()} = {Y.binary_repr}'
+    )
+    S = Inverted('0', '0' * (target_len))
+    for i in range(len(Y)):
+      printStep(f'\u1EF9_-{i + 1} = {Y_nums[i]}', S, f'S_{i}')
+      if Y_nums[i] == '1':
+        printStep(' ', (-X).mult(len(Y) - i - 1).equalize(target_len),
+                  f'-[X]_{X.suffix()} * 2^-{i + 1}',
+                  is_result=True,
+                  is_plus=True)
 
-  print(
-      f'Преобразуем разряды множителя [\u1EF8]_{Y.suffix()} = {Y.binary_repr}')
-  S = Inverted('0', '0' * (target_len))
-  for i in range(len(Y)):
-    printStep(f'\u1EF9_-{i + 1} = {Y_nums[i]}', S, f'S_{i}')
-    if Y_nums[i] == '1':
-      printStep(' ', (-X).mult(len(Y) - i - 1).equalize(target_len),
-                f'-[X]_{X.suffix()} * 2^-{i + 1}',
-                is_result=True,
-                is_plus=True)
+        S = S + (-X).mult(len(Y) - i - 1)
+      else:
+        printStep(' ', (-X).mult(len(Y) - i - 1).equalize(target_len),
+                  f'-[X]_{X.suffix()} * 2^-{i + 1}',
+                  is_result=True,
+                  is_plus=True,
+                  is_plus_crossed=True)
 
-      S = S + (-X).mult(len(Y) - i - 1)
-    else:
-      printStep(' ', (-X).mult(len(Y) - i - 1).equalize(target_len),
-                f'-[X]_{X.suffix()} * 2^-{i + 1}',
-                is_result=True,
-                is_plus=True,
-                is_plus_crossed=True)
-
-    printStep(' ', S, f'S_{i+1}')
-    print()
+      printStep(' ', S, f'S_{i+1}')
+      print()
+  else:
+    print(f'Y > 0 => преобразовывать ничего не надо')
+    S = Inverted('0', '0' * (target_len))
+    for i in range(len(Y)):
+      printStep(f'Y_-{i + 1} = {Y_nums[i]}', S, f'S_{i}')
+      if Y_nums[i] == '1':
+        printStep(' ', (X).mult(len(Y) - i - 1).equalize(target_len),
+                  f'[X]_{X.suffix()} * 2^-{i + 1}',
+                  is_result=True,
+                  is_plus=True)
+        S = S + (X).mult(len(Y) - i - 1)
+      else:
+        printStep(' ', (X).mult(len(Y) - i - 1).equalize(target_len),
+                  f'[X]_{X.suffix()} * 2^-{i + 1}',
+                  is_result=True,
+                  is_plus=True,
+                  is_plus_crossed=True)
+      printStep(' ', S, f'S_{i+1}')
+      print()
   S = S.equalize(len(X) + len(Y))
   printStep(' ', S, f'S_{len(Y) + 1}')
   Z = Inverted(sign, S.binary_repr)

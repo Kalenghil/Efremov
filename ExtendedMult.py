@@ -86,6 +86,7 @@ def secondMethod(X: Straight, Y: Straight):
   target_len = len(X) + len(Y)
   Y_nums = Y.sign + Y.binary_repr + '0'
   sign = XOR(X.sign, Y.sign)
+  curent_step = ''
 
   S = Extended('0', '0' * target_len)
   for i in range(len(Y) + 1):
@@ -116,6 +117,11 @@ def secondMethod(X: Straight, Y: Straight):
 
     printStep(' ', S, f'S_{i + 1}')
     print()
+  if curent_step == '01':
+    printStep(f'{"10"}', S, f'S_{len(Y)}')
+    S = S + X.mult(len(Y))
+    printStep(' ', X, '|X|', is_result=True, is_plus=True)
+    printStep(' ', S, f'S_{len(Y)}')
   S = S.equalize(len(X) + len(Y))
   printStep(' ', S, f'S_{len(Y) + 1}')
   Z = Extended(sign, S.binary_repr)
