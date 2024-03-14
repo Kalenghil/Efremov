@@ -25,7 +25,7 @@ def firstMethod(X: Straight, Y: Straight):
   S = Straight('0', '0' * (len(X) - 1))
   for i in range(len(Y) - 1, -1, -1):
     S = S.equalize(len(S) + 1)
-    printStep(f'Y_-{i} = {Y_nums[i]}', S, f'S_{len(Y) - i - 1} * 2^-1')
+    printStep(f'Y_-{i + 1} = {Y_nums[i]}', S, f'S_{len(Y) - i - 1} * 2^-1')
     if Y_nums[i] == '1':
       printStep(' ', X, '|X|', is_result=True, is_plus=True)
 
@@ -62,7 +62,7 @@ def secondMethod(X: Straight, Y: Straight):
 
   S = Straight('0', '0' * (len(X) + len(Y)))
   for i in range(len(Y) - 1, -1, -1):
-    printStep(f'Y_-{i} = {Y_nums[i]}', S, f'S_{len(Y) - i - 1}')
+    printStep(f'Y_-{i + 1} = {Y_nums[i]}', S, f'S_{len(Y) - i - 1}')
     if Y_nums[i] == '1':
       printStep(' ',
                 f'{" " * (i + 3) + X_mod.binary_repr}',
@@ -103,7 +103,7 @@ def thirdMethod(X: Straight, Y: Straight):
 
   S = Straight('0', '0' * (len(X) + len(Y)))
   for i in range(len(Y)):
-    printStep(f'Y_-{i} = {Y_nums[i]}', S, f'S_{i}')
+    printStep(f'Y_-{i + 1} = {Y_nums[i]}', S, f'S_{i}')
     cur_X = X_mod.mult(len(Y) - i - 1)
     if Y_nums[i] == '1':
       printStep(' ',
@@ -116,7 +116,7 @@ def thirdMethod(X: Straight, Y: Straight):
     else:
       printStep(' ',
                 f'{X_mod.equalize(len(S) - len(Y) + i + 1)}',
-                f'|X| * 2^{i + 1}',
+                f'|X| * 2^-{i + 1}',
                 is_result=True,
                 is_plus=True,
                 is_plus_crossed=True)
@@ -147,7 +147,7 @@ def fourthMethod(X: Straight, Y: Straight):
   S = Straight('0', '0' * (len(X) - 1))
   for i in range(len(Y)):
     S = S.mult(1)
-    printStep(f'Y_-{i} = {Y_nums[i]}', f'{S.binary_repr:>{target_len}}',
+    printStep(f'Y_-{i + 1} = {Y_nums[i]}', f'{S.binary_repr:>{target_len}}',
               f'S_{i} * 2')
     if Y_nums[i] == '1':
       printStep(' ',

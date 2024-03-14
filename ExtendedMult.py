@@ -118,7 +118,7 @@ def secondMethod(X: Straight, Y: Straight):
     print()
   S = S.equalize(len(X) + len(Y))
   printStep(' ', S, f'S_{len(Y) + 1}')
-  Z = Straight(sign, S.binary_repr)
+  Z = Extended(sign, S.binary_repr)
   print(f'Результат: [Z]_{Z.suffix()} = {str(Z)}, В десятичной: {frac(Z)}')
   print(
       f'Проверка: X * Y = {frac(X)} * {frac(Y)} = {int(X) * int(Y)}/{2 ** (len(X) + len(Y))}'
