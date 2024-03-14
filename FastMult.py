@@ -88,41 +88,44 @@ def PairMethod(X: Straight, Y: Straight):
 
     X_mod = abs(X)
     X_ext = intToExtended(int(X))
-    correction = '0'
+    correction = 0
 
     S = Extended('0', '0' * (len(X) - 2))
     for i in range(len(Y) - 1, -1, -2):
         S = S.equalize(len(S) + 2)
-        curent_step, correction = addBinaries(Y_nums[i-1:i+1], str(correction), True)
-        printStep(f'{curent_step}   +{correction}', S, f'S_{len(Y) - i - 1} * 2^-1')
-        match curent_step:
-            case '01':
+        current_step = int(Y_nums[i-1:i+1], 2)
+        printStep(f'{toBinary(current_step)}   +{correction}', S, f'S_{len(Y) - i - 1} * 2^-2')
+        current_step += correction  
+        correction = 0
+        match current_step:
+            case 1:
                 S = S + X_ext.mult(len(Y) - i - 1)
                 printStep(' ', X_ext, '+|X|', is_result=True, is_plus=True)
 
-            case '10':
+            case 2:
                 S = S + X_ext.mult(len(Y) - i)
                 printStep(' ', X_ext, '+2|X|', is_result=True, is_plus=True)
 
-            case '11':
+            case 3:
                 S = S - X_ext.mult(len(Y) - i - 1)
                 printStep(' ', -X_ext, '-|X|', is_result=True, is_plus=True)
-                correction, _ = addBinaries(correction, '1', True)
+                correction += 1
 
             case _:
                 printStep(' ', '', 'не меняем', is_result=True, is_plus=True, is_plus_crossed=True)
 
         printStep(' ', S, f'S_{len(Y) - i}')
         print()
-    if correction == '1':
+    print(correction)  
+    if correction > 0:
         S = S.equalize(len(S) + 2)
-        curent_step, correction = addBinaries(Y_nums[i - 1:i + 1], str(correction), True)
-        printStep(f'{curent_step}   +{correction}', S, f'S_{len(Y) - i - 1} * 2^-1')
+        current_step = correction
+        printStep(f'{toBinary(current_step)}   +{correction}', S, f'S_{len(Y) - i - 1} * 2^-1')
         S = S + X_ext.mult(len(Y))
         printStep(' ', X_ext, '+|X|', is_result=True, is_plus=True)
 
     S = S.equalize(len(X) + len(Y))
     printStep(' ', S, f'S_{len(Y)} * 2^-1')
-    Z = Straight(sign, S.binary_repr)
+    Z = Extended(sign, S.binary_repr)
     print(f'Результат: [Z]_{Z.suffix()} = {str(Z)}, В десятичной: {frac(Z)}')
     print(f'Проверка: X * Y = {frac(X)} * {frac(Y)} = {int(X) * int(Y)}/{2 ** (len(X) + len(Y))}')
