@@ -7,7 +7,7 @@ import ExtendedMult
 import InversedMult
 import Division
 
-DEBUG_MODE = True
+DEBUG_MODE = False
 
 def print_divider():
   print()
