@@ -3,7 +3,7 @@ from typing import Any
 
 def printStep(first: Any, second: Any, third: Any, *, is_plus=False, is_plus_crossed=False, is_result=False):
     if is_result:
-        second = underline(f'{str(second):<12}')
+        second = underline(f'{str(second):<15}')
 
     plus = ''
 
@@ -12,7 +12,7 @@ def printStep(first: Any, second: Any, third: Any, *, is_plus=False, is_plus_cro
         if is_plus_crossed:
             plus = "\u04FE"
 
-    print(f'{str(first):^9} {plus:^3} {str(second):<12} {str(third):<6}')
+    print(f'{str(first):^9} {plus:^3} {str(second):<15} {str(third):<6}')
 
 def frac(X):
     return f'{int(X)}/{2**len(X)}'

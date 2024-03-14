@@ -1,5 +1,6 @@
 from BNE import *
 import sys
+import shutil
 
 import StraightMult
 import FastMult
@@ -12,7 +13,10 @@ DEBUG_MODE = False
 
 def print_divider():
   print()
-  print("= = = = = = = = = = = = = = = = = = = = = = = = = =")
+  terminal_size = shutil.get_terminal_size()
+
+  divider = '= ' * (terminal_size.columns // 2)
+  print(divider)
   print()
 
 
