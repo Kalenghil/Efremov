@@ -3,8 +3,8 @@ from Output import *
 
 
 def print_header(X: Straight, Y: Straight):
-  X_ext = intToExtended(int(X))
-  Y_ext = intToExtended(int(Y))
+  X_ext = intToExtended(int(X)).equalize(len(X))
+  Y_ext = intToExtended(int(Y)).equalize(len(Y))
   print(
       f'{f"[X]_{X.suffix()} = {str(X)} = {int(X)}/{2 ** len(X)}":>16} {f"[X]_{X_ext.suffix()} = {str(X_ext)} = {int(X)}/{2 ** len(X)}"}'
   )
@@ -23,8 +23,8 @@ def print_header(X: Straight, Y: Straight):
 def firstMethod(X: Straight, Y: Straight):
   print_header(X, Y)
   target_len = len(X) + len(Y)
-  X = intToExtended(int(X))
-  Y = intToExtended(int(Y))
+  X = intToExtended(int(X)).equalize(len(X))
+  Y = intToExtended(int(Y)).equalize(len(Y))
   Y_nums = Y.sign + Y.binary_repr
   sign = XOR(X.sign, Y.sign)
 
@@ -81,8 +81,8 @@ def firstMethod(X: Straight, Y: Straight):
 def secondMethod(X: Straight, Y: Straight):
   print_header(X, Y)
 
-  X = intToExtended(int(X))
-  Y = intToExtended(int(Y))
+  X = intToExtended(int(X)).equalize(len(X))
+  Y = intToExtended(int(Y)).equalize(len(X))
   target_len = len(X) + len(Y)
   Y_nums = Y.sign + Y.binary_repr + '0'
   sign = XOR(X.sign, Y.sign)

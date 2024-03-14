@@ -5,8 +5,8 @@ from Output import *
 
 
 def print_header(X: Straight, Y: Straight):
-    X_ext = intToExtended(int(X))
-    Y_ext = intToExtended(int(Y))
+    X_ext = intToExtended(int(X)).equalize(len(X))
+    Y_ext = intToExtended(int(Y)).equalize(len(Y))
     print(f'{f"[X]_{X.suffix()} = {str(X)} = {int(X)}/{2 ** len(X)}":>16}')
     print(f'{f"[Y]_{Y.suffix()} = {str(Y)} = {int(Y)}/{2 ** len(Y)}":>16} {f"-[Y]_{Y_ext.suffix()} = {str(-Y_ext)} = {int(-Y)}/{2 ** len(Y)}"}')
 
@@ -53,6 +53,8 @@ def firstMethod(X: Straight, Y:Straight, digits_after_comma=4):
 
 def secondMethod(X: Straight, Y:Straight, digits_after_comma=4):
     print_header(X, Y)
+    X = X.equalize(len(X))
+    Y = Y.equalize(len(Y))
     Y_ext = intToExtended(-int(abs(Y)))
     i = 0
     target_len = digits_after_comma + len(X)

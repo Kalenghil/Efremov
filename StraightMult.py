@@ -14,6 +14,9 @@ def print_header(X: Straight, Y: Straight):
 def firstMethod(X: Straight, Y: Straight):
   print_header(X, Y)
 
+  X = X.equalize(len(X))
+  Y = Y.equalize(len(Y))
+
   Y_nums = Y.binary_repr
   sign = XOR(X.sign, Y.sign)
 
@@ -48,6 +51,9 @@ def firstMethod(X: Straight, Y: Straight):
 
 def secondMethod(X: Straight, Y: Straight):
   print_header(X, Y)
+
+  X = X.equalize(len(X))
+  Y = Y.equalize(len(Y))
 
   Y_nums = Y.binary_repr
   sign = XOR(X.sign, Y.sign)
@@ -87,6 +93,9 @@ def secondMethod(X: Straight, Y: Straight):
 def thirdMethod(X: Straight, Y: Straight):
   print_header(X, Y)
 
+  X = X.equalize(len(X))
+  Y = Y.equalize(len(Y))
+
   Y_nums = Y.binary_repr
   sign = XOR(X.sign, Y.sign)
 
@@ -125,6 +134,9 @@ def thirdMethod(X: Straight, Y: Straight):
 
 def fourthMethod(X: Straight, Y: Straight):
   print_header(X, Y)
+
+  X = X.equalize(len(X))
+  Y = Y.equalize(len(Y))
 
   Y_nums = Y.binary_repr
   target_len = len(X) + len(Y)
