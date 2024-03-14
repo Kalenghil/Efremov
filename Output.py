@@ -17,6 +17,10 @@ def printStep(first: Any, second: Any, third: Any, *, is_plus=False, is_plus_cro
 def frac(X):
     return f'{int(X)}/{2**len(X)}'
 
+def math_frac(x):
+    num, denom = (int(elem) for elem in frac(x).split(r'/'))
+    return num / denom
+
 def underline(text: Any):
     return f"\033[4m{str(text)}\033[0m"
 
