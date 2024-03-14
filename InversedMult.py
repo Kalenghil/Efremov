@@ -5,9 +5,9 @@ from Output import *
 def print_header(X: Straight, Y: Straight):
     X_inv = intToInversed(int(X))
     Y_inv = intToInversed(int(Y))
-    print(f'{f'[X]_{X.suffix()} = {str(X)} = {int(X)}/{2 ** len(X)}':>16} {f'[X]_{X_inv.suffix()} = {str(X_inv)} = {int(X)}/{2 ** len(X)}'}')
-    print(f'{f'[Y]_{Y.suffix()} = {str(Y)} = {int(Y)}/{2 ** len(Y)}':>16} {f'[Y]_{Y_inv.suffix()} = {str(Y_inv)} = {int(Y)}/{2 ** len(Y)}'}')
-    print(f'{f'-[X]_{X_inv.suffix()} = {str(-X_inv)} = {int(-X_inv)}/{2 ** len(X)}':>16}')
+    print(f'{f"[X]_{X.suffix()} = {str(X)} = {int(X)}/{2 ** len(X)}":>16} {f"[X]_{X_inv.suffix()} = {str(X_inv)} = {int(X)}/{2 ** len(X)}"}')
+    print(f'{f"[Y]_{Y.suffix()} = {str(Y)} = {int(Y)}/{2 ** len(Y)}":>16} {f"[Y]_{Y_inv.suffix()} = {str(Y_inv)} = {int(Y)}/{2 ** len(Y)}"}')
+    print(f'{f"-[X]_{X_inv.suffix()} = {str(-X_inv)} = {int(-X_inv)}/{2 ** len(X)}":>16}')
 
 
     print(f'1. Вычисляем знак: Z_зн = X_зн ⊕ Y_зн = {X.sign} ⊕ {Y.sign} = {XOR(X.sign, Y.sign)}')

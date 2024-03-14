@@ -7,8 +7,8 @@ from Output import *
 def print_header(X: Straight, Y: Straight):
     X_ext = intToExtended(int(X))
     Y_ext = intToExtended(int(Y))
-    print(f'{f'[X]_{X.suffix()} = {str(X)} = {int(X)}/{2 ** len(X)}':>16}')
-    print(f'{f'[Y]_{Y.suffix()} = {str(Y)} = {int(Y)}/{2 ** len(Y)}':>16} {f'-[Y]_{Y_ext.suffix()} = {str(-Y_ext)} = {int(-Y)}/{2 ** len(Y)}'}')
+    print(f'{f"[X]_{X.suffix()} = {str(X)} = {int(X)}/{2 ** len(X)}":>16}')
+    print(f'{f"[Y]_{Y.suffix()} = {str(Y)} = {int(Y)}/{2 ** len(Y)}":>16} {f"-[Y]_{Y_ext.suffix()} = {str(-Y_ext)} = {int(-Y)}/{2 ** len(Y)}"}')
 
 
 
@@ -67,7 +67,7 @@ def secondMethod(X: Straight, Y:Straight, digits_after_comma=4):
     for i in range(1, digits_after_comma + 2):
         if trash.sign == '1':
             Z.binary_repr += '0'
-            printStep('', trash, f'a_{i} < 0, => Z_{i} = 0')
+            printStep('', trash, f'a_{i} < 0, => Z_{i - 1} = 0')
             printStep('', (-Y_ext).mult(digits_after_comma - i).equalize(target_len), f'+|Y| * 2^-{i}',
                       is_plus=True, is_result=True)
             trash = trash + (-Y_ext).mult(digits_after_comma - i)
@@ -78,8 +78,7 @@ def secondMethod(X: Straight, Y:Straight, digits_after_comma=4):
                       is_plus=True, is_result=True)
             trash = trash + (Y_ext).mult(digits_after_comma - i)
 
-    print('\r')
-    print(' '*100)
+    print('^^^^ Строчку выше не записывать!!!! ^^^^^^')
     Z.sign, Z.binary_repr = Z.binary_repr[0], Z.binary_repr[1:]
     print(f'[Z]_{Z.suffix()} = {str(Z)} = {frac(Z)} = {math_frac(Z):.4f}')
     print(f'Правильный результат: {int(X)}/{int(Y)} = {int(X)/int(Y):.4f}')
