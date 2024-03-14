@@ -1,3 +1,5 @@
+import sys
+
 from BNE import *
 from Output import *
 
@@ -76,6 +78,8 @@ def secondMethod(X: Straight, Y:Straight, digits_after_comma=4):
                       is_plus=True, is_result=True)
             trash = trash + (Y_ext).mult(digits_after_comma - i)
 
+    print('\r')
+    print(' '*100)
     Z.sign, Z.binary_repr = Z.binary_repr[0], Z.binary_repr[1:]
     print(f'[Z]_{Z.suffix()} = {str(Z)} = {frac(Z)} = {math_frac(Z):.4f}')
     print(f'Правильный результат: {int(X)}/{int(Y)} = {int(X)/int(Y):.4f}')
